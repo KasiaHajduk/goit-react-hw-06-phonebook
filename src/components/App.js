@@ -1,11 +1,24 @@
+//import { Component } from 'react';
+//import { useState, useEffect } from 'react';
+
 import './App.css';
+import PhonebookList from './PhoneBook/PhonebookList/PhonebookList';
 
-import PhoneBook from './PhoneBook';
+import PhonebookEditor from './PhoneBook/PhonebookEditor/PhonebookEditor';
+import PhonebookFilter from './PhoneBook/PhonebookFilter/PhonebookFilter';
 
-export default function App() {
+
+function App () {
     return (
-        <div className="App">
-            <PhoneBook element={<PhoneBook />} />
+        <div>
+            <h1>Phonebook</h1>
+            <PhonebookEditor /> 
+            <h2>Contacts</h2>
+            <PhonebookFilter />
+            <PhonebookList />
+            
         </div>
-    )
+    );
 }
+
+export default App;
