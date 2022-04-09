@@ -1,22 +1,18 @@
 import PhonebookElement from "./PhonebookElement";
+
+import React from 'react';
 import { useSelector } from "react-redux";
 
-function getVisibleContacts (contacts, filter) {
-  const normalizedFilter = filter.toLowerCase().trim();
-  return contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(normalizedFilter)
-  );
-};
-
 export default function PhonebookList() {
-  const contacts = useSelector((state) =>
-    getVisibleContacts(state.contacts, state.filter)
-  );
+  const contacts = useSelector((state) => state.contacts);
+  const filter = useSelector((state) => state.filter);
+  const normalizedFilter = filter.toLowerCase().trim();
+  const filteredContacts = React.useMemo(() => contacts.filter((contact) => contact.name.toLowerCase().includes(normalizedFilter)), [filter, contacts]);
 
   return (
     <ul className='pblist'>
-      {contacts !== undefined &&
-        contacts.map(({ id, name, number }) => (
+      {filteredContacts !== undefined &&
+        filteredContacts.map(({ id, name, number }) => (
           <PhonebookElement key={id} id={id} name={name} number={number} />
         ))}
     </ul>
